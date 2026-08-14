@@ -132,6 +132,23 @@
     width:78%;
     color:rgba(0,0,0,0.55);
   }
+  /* Duotone photo styling — applies automatically to any <img> you drop in .profile-photo */
+  .profile-photo img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    /* object-position controls the crop/zoom: "center 15%" keeps the top (face) in frame.
+       Nudge the % down (e.g. "center 30%") to zoom out a bit, or up to zoom into the face more. */
+    object-position:center 30%;
+    filter:grayscale(1) contrast(1.2) brightness(0.95);
+  }
+  .profile-photo .duotone-overlay{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(160deg, #ff6b3d 0%, #c23c15 60%, #1a0803 100%);
+    mix-blend-mode:multiply;
+    pointer-events:none;
+  }
   .profile-photo .swap-note{
     position:absolute;
     bottom:8px; left:8px; right:8px;
@@ -586,9 +603,26 @@
           <path d="M2 40 C10 8, 45 2, 66 14" stroke="var(--orange-dim)" stroke-width="2" stroke-dasharray="1 7" stroke-linecap="round"/>
         </svg>
 
-      <div class="profile-photo">
-  <img src="pic.png" alt="Mouadh Saadaoui" style="width:100%; height:100%; object-fit:cover;">
-</div>
+        <div class="profile-photo">
+            <img src="pic.png" alt="Mouadh Saadaoui">
+            <div class="duotone-overlay"></div>
+          </div>
+
+        <!--
+          TO ADD YOUR PHOTO WITH THE STYLIZED DUOTONE LOOK:
+          Replace the whole .profile-photo block above with this instead
+          (put photo.jpg in the same folder as this file):
+
+          <div class="profile-photo">
+            <img src="photo.jpg" alt="Mouadh Saadaoui">
+            <div class="duotone-overlay"></div>
+          </div>
+
+          The img gets grayscaled + contrast-boosted by CSS, then the
+          .duotone-overlay tints it orange on top via mix-blend-mode.
+          Adjust the crop/zoom with the img's object-position in the
+          <style> block above (search for ".profile-photo img").
+        -->
 
         <svg class="deco-arc-bottom" viewBox="0 0 60 80" fill="none">
           <path d="M4 2c-4 26 2 46 24 58" stroke="var(--orange-dim)" stroke-width="2" stroke-dasharray="1 7" stroke-linecap="round"/>
